@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Create Profile</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+<style>
+
+body{
+    background:#09090b;
+}
+
+.grid-bg{
+    position:fixed;
+    inset:0;
+    z-index:-2;
+
+    background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+
+    background-size:60px 60px;
+}
+
+#spotlight{
+    position:fixed;
+    width:900px;
+    height:900px;
+    border-radius:9999px;
+    pointer-events:none;
+
+    background:radial-gradient(
+        circle,
+        rgba(0,255,255,.35) 0%,
+        rgba(0,180,255,.18) 25%,
+        rgba(0,100,255,.08) 45%,
+        transparent 75%
+    );
+
+    filter:blur(50px);
+
+    transform:translate(-50%,-50%);
+    z-index:-1;
+}
+
+@keyframes float{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-12px);
+    }
+}
+
+.hero-title{
+    animation:float 6s ease-in-out infinite;
+}
+
+.fade-up{
+    opacity:0;
+    transform:translateY(40px);
+    transition:all .8s ease;
+}
+
+.fade-up.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.form-card{
+    position:relative;
+    overflow:hidden;
+    backdrop-filter:blur(30px);
+}
+
+.form-card::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:-120%;
+    width:50%;
+    height:100%;
+
+    background:
+    linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.04),
+        transparent
+    );
+}
+
+.form-card:hover::before{
+    left:200%;
+    transition:1.2s;
+}
+
+.generate-btn{
+    position:relative;
+    overflow:hidden;
+}
+
+.generate-btn::before{
+    content:'';
+    position:absolute;
+    inset:0;
+
+    background:
+    linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,.15),
+        transparent
+    );
+
+    transform:translateX(-100%);
+}
+
+.generate-btn:hover::before{
+    transform:translateX(100%);
+    transition:.8s;
+}
+
+.input-field{
+    transition:.3s;
+}
+
+.input-field:focus{
+    transform:translateY(-2px);
+    box-shadow:0 0 30px rgba(79,140,255,.15);
+}
+
+</style>
+</head>
+
+<body class="text-white min-h-screen flex items-center justify-center p-6 overflow-x-hidden">
+
+<div class="grid-bg"></div>
+<div id="spotlight"></div>
+
+<div class="form-card fade-up
+w-full max-w-2xl
+bg-white/[0.03]
+border border-white/[0.06]
+rounded-[32px]
+p-8">
+
+    <h2 class="hero-title text-5xl font-black tracking-tight mb-10">
+        Create Profile
+    </h2>
+
+    <form method="POST" action = "{% url 'save_profile_view' %}" class="space-y-5">
+
+        {% csrf_token %}
+
+        <div>
+            <label class="block text-sm text-white/90 mb-2">
+                Full Name
+            </label>
+
+            <input
+                type="text"
+                name="name"
+                placeholder="John Doe"
+                class="input-field
+                w-full
+                bg-white/[0.03]
+                border border-white/[0.06]
+                rounded-2xl
+                px-5 py-4
+                text-white
+                placeholder:text-white/60
+                focus:outline-none
+                focus:border-cyan-400/50">
+        </div>
+
+        <div>
+            <label class="block text-sm text-white/90 mb-2">
+                Email
+            </label>
+
+            <input
+                type="email"
+                name="email"
+                placeholder="john@example.com"
+                class="input-field
+                w-full
+                bg-white/[0.03]
+                border border-white/[0.06]
+                rounded-2xl
+                px-5 py-4
+                text-white
+                placeholder:text-white/60
+                focus:outline-none
+                focus:border-cyan-400/50">
+        </div>
+
+        <div>
+            <label class="block text-sm text-white/90 mb-2">
+                Phone Number
+            </label>
+
+            <input
+                type="text"
+                name="phone"
+                placeholder="+91 9876543210"
+                class="input-field
+                w-full
+                bg-white/[0.03]
+                border border-white/[0.06]
+                rounded-2xl
+                px-5 py-4
+                text-white
+                placeholder:text-white/60
+                focus:outline-none
+                focus:border-cyan-400/50">
+        </div>
+<div>
+    <label class="block text-sm text-white/90 mb-2">
+        Degree
+    </label>
+
+    <input
+        type="text"
+        name="degree"
+        placeholder="BSc Computer Science"
+        class="input-field w-full bg-white/[0.03] border border-white/[0.06] rounded-2xl px-5 py-4 text-white placeholder:text-white/60 focus:outline-none focus:border-cyan-400/50">
+</div>
+
+<div>
+    <label class="block text-sm text-white/90 mb-2">
+        School
+    </label>
+
+    <input
+        type="text"
+        name="school"
+        placeholder="ABC High School"
+        class="input-field w-full bg-white/[0.03] border border-white/[0.06] rounded-2xl px-5 py-4 text-white placeholder:text-white/60 focus:outline-none focus:border-cyan-400/50">
+</div>
+
+<div>
+    <label class="block text-sm text-white/90 mb-2">
+        University
+    </label>
+
+    <input
+        type="text"
+        name="university"
+        placeholder="XYZ University"
+        class="input-field w-full bg-white/[0.03] border border-white/[0.06] rounded-2xl px-5 py-4 text-white placeholder:text-white/60 focus:outline-none focus:border-cyan-400/50">
+</div>
+
+<div>
+    <label class="block text-sm text-white/90 mb-2">
+        Professional Summary
+    </label>
+
+    <textarea
+        name="summary"
+        rows="5"
+        placeholder="Tell us about yourself..."
+        class="input-field w-full bg-white/[0.03] border border-white/[0.06] rounded-2xl px-5 py-4 text-white placeholder:text-white/60 focus:outline-none focus:border-cyan-400/50"></textarea>
+</div>
+
+<div>
+    <label class="block text-sm text-white/90 mb-2">
+        Previous Work Experience
+    </label>
+
+    <textarea
+        name="previous_work"
+        rows="6"
+        placeholder="Describe your work experience..."
+        class="input-field w-full bg-white/[0.03] border border-white/[0.06] rounded-2xl px-5 py-4 text-white placeholder:text-white/60 focus:outline-none focus:border-cyan-400/50"></textarea>
+</div>
+        <div>
+            <label class="block text-sm text-zinc-500 mb-2">
+                Skills
+            </label>
+
+            <input
+                type="text"
+                name="skills"
+                placeholder="Python, Django, SQL"
+                class="input-field
+                w-full
+                bg-white/[0.03]
+                border border-white/[0.06]
+                rounded-2xl
+                px-5 py-4
+                text-white
+                placeholder:text-white/60
+                focus:outline-none
+                focus:border-cyan-400/50">
+        </div>
+
+        <button
+            type="submit"
+            class="generate-btn
+            w-full
+            mt-6
+            py-5
+            rounded-2xl
+            bg-white
+            text-black
+            font-semibold
+            hover:bg-zinc-200
+            transition">
+
+            Generate CV
+
+        </button>
+
+    </form>
+
+</div>
+
+<script>
+
+const spotlight =
+document.getElementById('spotlight');
+
+document.addEventListener('mousemove',(e)=>{
+
+    spotlight.style.left =
+    e.clientX + 'px';
+
+    spotlight.style.top =
+    e.clientY + 'px';
+
+});
+
+const observer =
+new IntersectionObserver((entries)=>{
+
+    entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add('show');
+
+        }
+
+    });
+
+});
+
+document
+.querySelectorAll('.fade-up')
+.forEach(el=>observer.observe(el));
+
+</script>
+
+</body>
+</html>

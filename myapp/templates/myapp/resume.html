@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ user_profile.name }} - Resume</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-[#0a0a0a] py-16">
+
+    <main class="max-w-4xl mx-auto bg-[#161617] rounded-[32px] p-14">
+
+        <!-- Header -->
+        <section class="mb-14">
+            <h1 class="text-5xl font-semibold tracking-tight text-white">
+                {{ user_profile.name }}
+            </h1>
+
+            <div class="mt-4 flex flex-wrap gap-6 text-[#86868b] text-sm">
+                <span>{{ user_profile.email }}</span>
+                <span>{{ user_profile.phone }}</span>
+            </div>
+        </section>
+
+        <div class="h-px bg-[#2d2d2f] mb-12"></div>
+
+        <!-- Summary -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold text-white mb-5">
+                Summary
+            </h2>
+
+            <p class="text-[#a1a1a6] leading-8">
+                {{ user_profile.summary }}
+            </p>
+        </section>
+
+        <div class="h-px bg-[#2d2d2f] mb-12"></div>
+
+        <!-- Education -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold text-white mb-5">
+                Education
+            </h2>
+
+            <div class="space-y-6">
+
+                <div>
+                    <p class="text-white font-medium text-lg">
+                        {{ user_profile.degree }}
+                    </p>
+                    <p class="text-[#86868b]">
+                        Degree
+                    </p>
+                </div>
+
+                <div>
+                    <p class="text-white">
+                        {{ user_profile.university }}
+                    </p>
+                    <p class="text-[#86868b]">
+                        University
+                    </p>
+                </div>
+
+                <div>
+                    <p class="text-white">
+                        {{ user_profile.school }}
+                    </p>
+                    <p class="text-[#86868b]">
+                        School
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="h-px bg-[#2d2d2f] mb-12"></div>
+
+        <!-- Experience -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold text-white mb-5">
+                Experience
+            </h2>
+
+            <p class="text-[#a1a1a6] leading-8 whitespace-pre-line">
+                {{ user_profile.previous_work }}
+            </p>
+        </section>
+
+        <div class="h-px bg-[#2d2d2f] mb-12"></div>
+
+        <!-- Skills -->
+        <section>
+            <h2 class="text-2xl font-semibold text-white mb-5">
+                Skills
+            </h2>
+
+            <div class="flex flex-wrap gap-3">
+
+                {% for skill in user_profile.skills.split %}
+                <span class="px-4 py-2 rounded-full bg-[#232325] text-[#d2d2d7] text-sm">
+                    {{ skill }}
+                </span>
+                {% endfor %}
+
+            </div>
+        </section>
+<div class="text-center mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+
+    <!-- Print Button -->
+    <button
+        onclick="window.print()"
+        class="px-6 py-3 rounded-xl bg-[#111827] text-white text-sm font-medium
+               hover:bg-black transition shadow-sm active:scale-[0.98]"
+    >
+        Print CV
+    </button>
+
+    <!-- Back Link -->
+    <a href="/"
+       class="px-6 py-3 rounded-xl bg-[#f3f4f6] text-[#111827] text-sm font-medium
+              border border-[#e5e7eb] hover:bg-[#e5e7eb] transition"
+    >
+        Back to Home
+    </a>
+
+</div>
+
+    </main>
+
+</body>
+</html>
